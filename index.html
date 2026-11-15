@@ -28,7 +28,48 @@
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
         }
         * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg-main); color: var(--text-main); margin: 0; line-height: 1.6; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg-main); color: var(--text-main); margin: 0; line-height: 1.6; overflow-x: hidden; }
+
+        /* Приветственная заставка при входе */
+        .welcome-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-green));
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: hideWelcome 0.7s ease-in-out 1.5s forwards;
+            pointer-events: none;
+        }
+        .welcome-emoji {
+            font-size: 4.5em;
+            animation: bounceIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .welcome-text {
+            font-size: 3em;
+            font-weight: bold;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: fadeUpText 0.6s ease-out 0.25s both;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.2); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fadeUpText {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes hideWelcome {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.08); visibility: hidden; }
+        }
+
         .theme-toggle {
             position: fixed; top: 20px; right: 20px; background: var(--bg-card); color: var(--text-main);
             border: 2px solid var(--border-color); padding: 10px 18px; border-radius: 50px;
@@ -55,7 +96,6 @@
         }
         .btn:hover { background: var(--accent-red); color: #fff; transform: scale(1.06); }
         
-        /* Блок последнего войс-чата */
         .voice-box {
             background: var(--accent-green-soft); border: 1px dashed var(--accent-green);
             border-radius: 24px; padding: 18px 22px; display: flex; flex-wrap: wrap;
@@ -92,6 +132,12 @@
 </head>
 <body>
 
+    <!-- Экран приветствия -->
+    <div class="welcome-screen">
+        <div class="welcome-emoji">🍎</div>
+        <div class="welcome-text">Привет! 👋</div>
+    </div>
+
     <button type="button" class="theme-toggle" id="themeBtn">🌙 Темная тема</button>
 
     <header>
@@ -102,7 +148,6 @@
 
     <div class="container">
         
-        <!-- Новый раздел: Последний войс-чат -->
         <div class="card">
             <h2>🎙️ Последний войс-чат был:</h2>
             <div class="voice-box">
@@ -162,15 +207,4 @@
                 <span class="role">${m.role}</span>
             </div>
         `).join('');
-
-        const themeBtn = document.getElementById('themeBtn');
-        themeBtn.onclick = function() {
-            document.body.classList.toggle('dark-theme');
-            themeBtn.textContent = document.body.classList.contains('dark-theme') ? '☀️ Светлая тема' : '🌙 Темная тема';
-        };
-    </script>
-
-</body>
-</html>
-
 
