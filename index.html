@@ -17,10 +17,12 @@
         }
         * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg-main); color: var(--text-main); margin: 0; line-height: 1.6; overflow-x: hidden; }
-        .welcome-screen {
-            position: fixed; inset: 0; background: linear-gradient(135deg, var(--accent-red), var(--accent-green));
-            color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 9999; animation: hideWelcome 0.7s ease-in-out 1.5s forwards; pointer-events: none;
+               .welcome-screen {
+            position: fixed; inset: 0; background: linear-gradient(135deg, var(--accent-red), var(--accent-green), var(--accent-red));
+            background-size: 300% 300%; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 9999; animation: gradientFlow 4s ease infinite, hideWelcome 0.7s ease-in-out 1.5s forwards; pointer-events: none;
+        }
+
         }
         .welcome-emoji { font-size: 4.5em; animation: bounceIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .welcome-text { font-size: 3em; font-weight: bold; margin-top: 10px; animation: fadeUpText 0.6s ease-out 0.25s both; }
@@ -33,11 +35,18 @@
             cursor: pointer; font-weight: bold; box-shadow: var(--shadow); z-index: 10000;
         }
         .theme-toggle:hover { transform: scale(1.06); }
-        header {
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-green));
+               header {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-green), #ff758f, var(--accent-green));
+            background-size: 300% 300%; animation: gradientFlow 7s ease infinite;
             color: #fff; padding: 70px 20px 60px; text-align: center;
             border-bottom-left-radius: 45px; border-bottom-right-radius: 45px;
         }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         header h1 { margin: 0; font-size: 2.6em; }
         .container { max-width: 900px; margin: 35px auto; padding: 0 20px; }
         .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 32px; padding: 30px; margin-bottom: 28px; box-shadow: var(--shadow); }
